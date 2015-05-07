@@ -1,0 +1,17 @@
+-- By Jamie Al-Nasir, 01/12/2013
+-- Dept. of Computer Science, Royal Holloway university
+--
+-- Data used was extracted from SRA (DATE BELOW according to METADATA table date entry)
+-- creation timestamp|2013-11-15 02:10:25
+--
+-- Query to check for experiment:library_construction_protocol fields which appear to contain
+-- ONLY a url as given by a text field that contains "http://" within and a small field length
+-- of <=300 characters (http:// at the beginning of the field is not used because the field may
+-- start "for more information see: " etc...;
+
+select
+'library_construction_protocol',
+count(*) as [Count] from
+experiment where
+library_construction_protocol like "%http://%"
+and length(library_construction_protocol) <= 300;

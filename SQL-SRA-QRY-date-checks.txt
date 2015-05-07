@@ -1,0 +1,108 @@
+
+-- Counts of Studies per year (2005 onwards, no studies for 2004)
+
+-- 2005|64
+-- 2006|38
+-- 2007|94
+-- 2008|269
+-- 2009|893
+-- 2010|2631
+-- 2011|4077
+-- 2012|5208
+-- 2013|724
+
+
+-- Counts of Studies per year (2005 onwards, no studies for 2004)
+
+select 'table: submissions, by year';
+
+select '2005', count(*) from (
+select study_accession from experiment where
+  submission_accession in
+  (
+    select submission_accession from submission where submission_date like '%2005%'
+  )
+group by study_accession
+)
+union all
+select '2006', count(*) from (
+select study_accession from experiment where
+  submission_accession in
+  (
+    select submission_accession from submission where submission_date like '%2006%'
+  )
+group by study_accession
+)
+union all
+select '2007', count(*) from (
+select study_accession from experiment where
+  submission_accession in
+  (
+    select submission_accession from submission where submission_date like '%2007%'
+  )
+group by study_accession
+)
+union all
+select '2008', count(*) from (
+select study_accession from experiment where
+  submission_accession in
+  (
+    select submission_accession from submission where submission_date like '%2008%'
+  )
+group by study_accession
+)
+union all
+select '2009', count(*) from (
+select study_accession from experiment where
+  submission_accession in
+  (
+    select submission_accession from submission where submission_date like '%2009%'
+  )
+group by study_accession
+)
+union all
+select '2010', count(*) from (
+select study_accession from experiment where
+  submission_accession in
+  (
+    select submission_accession from submission where submission_date like '%2010%'
+  )
+group by study_accession
+)
+union all
+select '2011', count(*) from (
+select study_accession from experiment where
+  submission_accession in
+  (
+    select submission_accession from submission where submission_date like '%2011%'
+  )
+group by study_accession
+)
+union all
+select '2012', count(*) from (
+select study_accession from experiment where
+  submission_accession in
+  (
+    select submission_accession from submission where submission_date like '%2012%'
+  )
+group by study_accession
+)
+union all
+select '2013', count(*) from (
+select study_accession from experiment where
+  submission_accession in
+  (
+    select submission_accession from submission where submission_date like '%2013%'
+  )
+group by study_accession
+);
+
+
+select 'table: submissions, by year';
+
+select
+  strftime('%Y', submission_date) as m, count(*) from submission as sub
+join
+  study as stu
+on stu.submission_accession = sub.submission_accession
+group by m;

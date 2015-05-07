@@ -1,0 +1,450 @@
+-- By Jamie Al-Nasir, 01/12/2013
+-- Dept. of Computer Science, Royal Holloway university
+--
+--
+-- SQL Queries for SQLite that list TOTAL_RECORDS and counts of all NULL fields
+-- for the key SUBMISSION, STUDY, SAMPLE, EXPERIMENT, RUN, SRA tables
+--
+-- Data used was extracted from SRA (DATE BELOW according to METADATA table date entry)
+-- creation timestamp|2013-11-15 02:10:25
+
+
+
+-- SUBMISSION
+select 'table: submission';
+select * from
+(
+select 'TOTAL_RECORDS', count(*) from submission
+union all
+select 'submission_ID', count(*) as [Count] from submission where submission_ID is null
+union all
+select 'submission_alias', count(*) as [Count] from submission where submission_alias is null
+union all
+select 'submission_accession', count(*) as [Count] from submission where submission_accession is null
+union all
+select 'submission_comment', count(*) as [Count] from submission where submission_comment is null
+union all
+select 'files', count(*) as [Count] from submission where files is null
+union all
+select 'broker_name', count(*) as [Count] from submission where broker_name is null
+union all
+select 'center_name', count(*) as [Count] from submission where center_name is null
+union all
+select 'lab_name', count(*) as [Count] from submission where lab_name is null
+union all
+select 'submission_date', count(*) as [Count] from submission where submission_date is null
+union all
+select 'sra_link', count(*) as [Count] from submission where sra_link is null
+union all
+select 'submission_url_link', count(*) as [Count] from submission where submission_url_link is null
+union all
+select 'xref_link', count(*) as [Count] from submission where xref_link is null
+union all
+select 'submission_entrez_link', count(*) as [Count] from submission where submission_entrez_link is null
+union all
+select 'ddbj_link', count(*) as [Count] from submission where ddbj_link is null
+union all
+select 'ena_link', count(*) as [Count] from submission where ena_link is null
+union all
+select 'submission_attribute', count(*) as [Count] from submission where submission_attribute is null
+union all
+select 'sradb_updated', count(*) as [Count] from submission where sradb_updated is null
+);
+
+
+-- STUDY
+select 'table: study';
+select * from
+(
+select 'TOTAL_RECORDS', count(*) from study
+union all
+select 'study_ID', count(*) as [Count] from study where study_ID is null
+union all
+select 'study_alias', count(*) as [Count] from study where study_alias is null
+union all
+select 'study_accession', count(*) as [Count] from study where study_accession is null
+union all
+select 'study_title', count(*) as [Count] from study where study_title is null
+union all
+select 'study_type', count(*) as [Count] from study where study_type is null
+union all
+select 'study_abstract', count(*) as [Count] from study where study_abstract is null
+union all
+select 'broker_name', count(*) as [Count] from study where broker_name is null
+union all
+select 'center_name', count(*) as [Count] from study where center_name is null
+union all
+select 'center_project_name', count(*) as [Count] from study where center_project_name is null
+union all
+select 'study_description', count(*) as [Count] from study where study_description is null
+union all
+select 'related_studies', count(*) as [Count] from study where related_studies is null
+union all
+select 'primary_study', count(*) as [Count] from study where primary_study is null
+union all
+select 'sra_link', count(*) as [Count] from study where sra_link is null
+union all
+select 'study_url_link', count(*) as [Count] from study where study_url_link is null
+union all
+select 'xref_link', count(*) as [Count] from study where xref_link is null
+union all
+select 'study_entrez_link', count(*) as [Count] from study where study_entrez_link is null
+union all
+select 'ddbj_link', count(*) as [Count] from study where ddbj_link is null
+union all
+select 'ena_link', count(*) as [Count] from study where ena_link is null
+union all
+select 'study_attribute', count(*) as [Count] from study where study_attribute is null
+union all
+select 'submission_accession', count(*) as [Count] from study where submission_accession is null
+union all
+select 'sradb_updated', count(*) as [Count] from study where sradb_updated is null
+);
+
+
+-- SAMPLE
+select 'table: sample';
+select * from
+(
+select 'TOTAL_RECORDS', count(*) from sample
+union all
+select 'sample_ID', count(*) as [Count] from sample where sample_ID is null
+union all
+select 'sample_alias', count(*) as [Count] from sample where sample_alias is null
+union all
+select 'sample_accession', count(*) as [Count] from sample where sample_accession is null
+union all
+select 'broker_name', count(*) as [Count] from sample where broker_name is null
+union all
+select 'center_name', count(*) as [Count] from sample where center_name is null
+union all
+select 'taxon_id', count(*) as [Count] from sample where taxon_id is null
+union all
+select 'scientific_name', count(*) as [Count] from sample where scientific_name is null
+union all
+select 'common_name', count(*) as [Count] from sample where common_name is null
+union all
+select 'anonymized_name', count(*) as [Count] from sample where anonymized_name is null
+union all
+select 'individual_name', count(*) as [Count] from sample where individual_name is null
+union all
+select 'description', count(*) as [Count] from sample where description is null
+union all
+select 'sra_link', count(*) as [Count] from sample where sra_link is null
+union all
+select 'sample_url_link', count(*) as [Count] from sample where sample_url_link is null
+union all
+select 'xref_link', count(*) as [Count] from sample where xref_link is null
+union all
+select 'sample_entrez_link', count(*) as [Count] from sample where sample_entrez_link is null
+union all
+select 'ddbj_link', count(*) as [Count] from sample where ddbj_link is null
+union all
+select 'ena_link', count(*) as [Count] from sample where ena_link is null
+union all
+select 'sample_attribute', count(*) as [Count] from sample where sample_attribute is null
+union all
+select 'submission_accession', count(*) as [Count] from sample where submission_accession is null
+union all
+select 'sradb_updated', count(*) as [Count] from sample where sradb_updated is null
+);
+
+
+-- EXPERIMENT
+select 'table: experiment';
+select * from
+(
+select 'TOTAL_RECORDS', count(*) from experiment
+union all
+select 'experiment_ID', count(*) as [Count] from experiment where experiment_ID is null
+union all
+select 'bamFile', count(*) as [Count] from experiment where bamFile is null
+union all
+select 'fastqFTP', count(*) as [Count] from experiment where fastqFTP is null
+union all
+select 'experiment_alias', count(*) as [Count] from experiment where experiment_alias is null
+union all
+select 'experiment_accession', count(*) as [Count] from experiment where experiment_accession is null
+union all
+select 'broker_name', count(*) as [Count] from experiment where broker_name is null
+union all
+select 'center_name', count(*) as [Count] from experiment where center_name is null
+union all
+select 'title', count(*) as [Count] from experiment where title is null
+union all
+select 'study_name', count(*) as [Count] from experiment where study_name is null
+union all
+select 'study_accession', count(*) as [Count] from experiment where study_accession is null
+union all
+select 'design_description', count(*) as [Count] from experiment where design_description is null
+union all
+select 'sample_name', count(*) as [Count] from experiment where sample_name is null
+union all
+select 'sample_accession', count(*) as [Count] from experiment where sample_accession is null
+union all
+select 'sample_member', count(*) as [Count] from experiment where sample_member is null
+union all
+select 'library_name', count(*) as [Count] from experiment where library_name is null
+union all
+select 'library_strategy', count(*) as [Count] from experiment where library_strategy is null
+union all
+select 'library_source', count(*) as [Count] from experiment where library_source is null
+union all
+select 'library_selection', count(*) as [Count] from experiment where library_selection is null
+union all
+select 'library_layout', count(*) as [Count] from experiment where library_layout is null
+union all
+select 'targeted_loci', count(*) as [Count] from experiment where targeted_loci is null
+union all
+select 'library_construction_protocol', count(*) as [Count] from experiment where library_construction_protocol is null
+union all
+select 'spot_length', count(*) as [Count] from experiment where spot_length is null
+union all
+select 'adapter_spec', count(*) as [Count] from experiment where adapter_spec is null
+union all
+select 'read_spec', count(*) as [Count] from experiment where read_spec is null
+union all
+select 'platform', count(*) as [Count] from experiment where platform is null
+union all
+select 'instrument_model', count(*) as [Count] from experiment where instrument_model is null
+union all
+select 'platform_parameters', count(*) as [Count] from experiment where platform_parameters is null
+union all
+select 'sequence_space', count(*) as [Count] from experiment where sequence_space is null
+union all
+select 'base_caller', count(*) as [Count] from experiment where base_caller is null
+union all
+select 'quality_scorer', count(*) as [Count] from experiment where quality_scorer is null
+union all
+select 'number_of_levels', count(*) as [Count] from experiment where number_of_levels is null
+union all
+select 'multiplier', count(*) as [Count] from experiment where multiplier is null
+union all
+select 'qtype', count(*) as [Count] from experiment where qtype is null
+union all
+select 'sra_link', count(*) as [Count] from experiment where sra_link is null
+union all
+select 'experiment_url_link', count(*) as [Count] from experiment where experiment_url_link is null
+union all
+select 'xref_link', count(*) as [Count] from experiment where xref_link is null
+union all
+select 'experiment_entrez_link', count(*) as [Count] from experiment where experiment_entrez_link is null
+union all
+select 'ddbj_link', count(*) as [Count] from experiment where ddbj_link is null
+union all
+select 'ena_link', count(*) as [Count] from experiment where ena_link is null
+union all
+select 'experiment_attribute', count(*) as [Count] from experiment where experiment_attribute is null
+union all
+select 'submission_accession', count(*) as [Count] from experiment where submission_accession is null
+union all
+select 'sradb_updated', count(*) as [Count] from experiment where sradb_updated is null
+);
+
+
+-- RUN
+select 'table: run';
+select * from
+(
+select 'TOTAL_RECORDS', count(*) from run
+union all
+select 'run_ID', count(*) as [Count] from run where run_ID is null
+union all
+select 'bamFile', count(*) as [Count] from run where bamFile is null
+union all
+select 'run_alias', count(*) as [Count] from run where run_alias is null
+union all
+select 'run_accession', count(*) as [Count] from run where run_accession is null
+union all
+select 'broker_name', count(*) as [Count] from run where broker_name is null
+union all
+select 'instrument_name', count(*) as [Count] from run where instrument_name is null
+union all
+select 'run_date', count(*) as [Count] from run where run_date is null
+union all
+select 'run_file', count(*) as [Count] from run where run_file is null
+union all
+select 'run_center', count(*) as [Count] from run where run_center is null
+union all
+select 'total_data_blocks', count(*) as [Count] from run where total_data_blocks is null
+union all
+select 'experiment_accession', count(*) as [Count] from run where experiment_accession is null
+union all
+select 'experiment_name', count(*) as [Count] from run where experiment_name is null
+union all
+select 'sra_link', count(*) as [Count] from run where sra_link is null
+union all
+select 'run_url_link', count(*) as [Count] from run where run_url_link is null
+union all
+select 'xref_link', count(*) as [Count] from run where xref_link is null
+union all
+select 'run_entrez_link', count(*) as [Count] from run where run_entrez_link is null
+union all
+select 'ddbj_link', count(*) as [Count] from run where ddbj_link is null
+union all
+select 'ena_link', count(*) as [Count] from run where ena_link is null
+union all
+select 'run_attribute', count(*) as [Count] from run where run_attribute is null
+union all
+select 'submission_accession', count(*) as [Count] from run where submission_accession is null
+union all
+select 'sradb_updated', count(*) as [Count] from run where sradb_updated is null
+);
+
+
+-- SRA
+select 'table: sra';
+select * from
+(
+select 'TOTAL_RECORDS', count(*) from sra
+union all
+select 'sra_ID', count(*) as [Count] from sra where sra_ID is null
+union all
+select 'SRR_bamFile', count(*) as [Count] from sra where SRR_bamFile is null
+union all
+select 'SRX_bamFile', count(*) as [Count] from sra where SRX_bamFile is null
+union all
+select 'SRX_fastqFTP', count(*) as [Count] from sra where SRX_fastqFTP is null
+union all
+select 'run_ID', count(*) as [Count] from sra where run_ID is null
+union all
+select 'run_alias', count(*) as [Count] from sra where run_alias is null
+union all
+select 'run_accession', count(*) as [Count] from sra where run_accession is null
+union all
+select 'run_date', count(*) as [Count] from sra where run_date is null
+union all
+select 'updated_date', count(*) as [Count] from sra where updated_date is null
+union all
+select 'spots', count(*) as [Count] from sra where spots is null
+union all
+select 'bases', count(*) as [Count] from sra where bases is null
+union all
+select 'run_center', count(*) as [Count] from sra where run_center is null
+union all
+select 'experiment_name', count(*) as [Count] from sra where experiment_name is null
+union all
+select 'run_url_link', count(*) as [Count] from sra where run_url_link is null
+union all
+select 'run_entrez_link', count(*) as [Count] from sra where run_entrez_link is null
+union all
+select 'run_attribute', count(*) as [Count] from sra where run_attribute is null
+union all
+select 'experiment_ID', count(*) as [Count] from sra where experiment_ID is null
+union all
+select 'experiment_alias', count(*) as [Count] from sra where experiment_alias is null
+union all
+select 'experiment_accession', count(*) as [Count] from sra where experiment_accession is null
+union all
+select 'experiment_title', count(*) as [Count] from sra where experiment_title is null
+union all
+select 'study_name', count(*) as [Count] from sra where study_name is null
+union all
+select 'sample_name', count(*) as [Count] from sra where sample_name is null
+union all
+select 'design_description', count(*) as [Count] from sra where design_description is null
+union all
+select 'library_name', count(*) as [Count] from sra where library_name is null
+union all
+select 'library_strategy', count(*) as [Count] from sra where library_strategy is null
+union all
+select 'library_source', count(*) as [Count] from sra where library_source is null
+union all
+select 'library_selection', count(*) as [Count] from sra where library_selection is null
+union all
+select 'library_layout', count(*) as [Count] from sra where library_layout is null
+union all
+select 'library_construction_protocol', count(*) as [Count] from sra where library_construction_protocol is null
+union all
+select 'adapter_spec', count(*) as [Count] from sra where adapter_spec is null
+union all
+select 'read_spec', count(*) as [Count] from sra where read_spec is null
+union all
+select 'platform', count(*) as [Count] from sra where platform is null
+union all
+select 'instrument_model', count(*) as [Count] from sra where instrument_model is null
+union all
+select 'instrument_name', count(*) as [Count] from sra where instrument_name is null
+union all
+select 'platform_parameters', count(*) as [Count] from sra where platform_parameters is null
+union all
+select 'sequence_space', count(*) as [Count] from sra where sequence_space is null
+union all
+select 'base_caller', count(*) as [Count] from sra where base_caller is null
+union all
+select 'quality_scorer', count(*) as [Count] from sra where quality_scorer is null
+union all
+select 'number_of_levels', count(*) as [Count] from sra where number_of_levels is null
+union all
+select 'multiplier', count(*) as [Count] from sra where multiplier is null
+union all
+select 'qtype', count(*) as [Count] from sra where qtype is null
+union all
+select 'experiment_url_link', count(*) as [Count] from sra where experiment_url_link is null
+union all
+select 'experiment_entrez_link', count(*) as [Count] from sra where experiment_entrez_link is null
+union all
+select 'experiment_attribute', count(*) as [Count] from sra where experiment_attribute is null
+union all
+select 'sample_ID', count(*) as [Count] from sra where sample_ID is null
+union all
+select 'sample_alias', count(*) as [Count] from sra where sample_alias is null
+union all
+select 'sample_accession', count(*) as [Count] from sra where sample_accession is null
+union all
+select 'taxon_id', count(*) as [Count] from sra where taxon_id is null
+union all
+select 'common_name', count(*) as [Count] from sra where common_name is null
+union all
+select 'anonymized_name', count(*) as [Count] from sra where anonymized_name is null
+union all
+select 'individual_name', count(*) as [Count] from sra where individual_name is null
+union all
+select 'description', count(*) as [Count] from sra where description is null
+union all
+select 'sample_url_link', count(*) as [Count] from sra where sample_url_link is null
+union all
+select 'sample_entrez_link', count(*) as [Count] from sra where sample_entrez_link is null
+union all
+select 'sample_attribute', count(*) as [Count] from sra where sample_attribute is null
+union all
+select 'study_ID', count(*) as [Count] from sra where study_ID is null
+union all
+select 'study_alias', count(*) as [Count] from sra where study_alias is null
+union all
+select 'study_accession', count(*) as [Count] from sra where study_accession is null
+union all
+select 'study_title', count(*) as [Count] from sra where study_title is null
+union all
+select 'study_type', count(*) as [Count] from sra where study_type is null
+union all
+select 'study_abstract', count(*) as [Count] from sra where study_abstract is null
+union all
+select 'center_project_name', count(*) as [Count] from sra where center_project_name is null
+union all
+select 'study_description', count(*) as [Count] from sra where study_description is null
+union all
+select 'study_url_link', count(*) as [Count] from sra where study_url_link is null
+union all
+select 'study_entrez_link', count(*) as [Count] from sra where study_entrez_link is null
+union all
+select 'study_attribute', count(*) as [Count] from sra where study_attribute is null
+union all
+select 'related_studies', count(*) as [Count] from sra where related_studies is null
+union all
+select 'primary_study', count(*) as [Count] from sra where primary_study is null
+union all
+select 'submission_ID', count(*) as [Count] from sra where submission_ID is null
+union all
+select 'submission_accession', count(*) as [Count] from sra where submission_accession is null
+union all
+select 'submission_comment', count(*) as [Count] from sra where submission_comment is null
+union all
+select 'submission_center', count(*) as [Count] from sra where submission_center is null
+union all
+select 'submission_lab', count(*) as [Count] from sra where submission_lab is null
+union all
+select 'submission_date', count(*) as [Count] from sra where submission_date is null
+union all
+select 'sradb_updated', count(*) as [Count] from sra where sradb_updated is null
+);

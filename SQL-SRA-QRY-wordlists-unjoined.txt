@@ -1,0 +1,459 @@
+-- By Jamie Al-Nasir, 01/12/2013
+-- Dept. of Computer Science, Royal Holloway university
+--
+--
+-- SQL Queries for SQLite that query SRA for occurence of protocol step annotations
+-- using the word groups below.
+--
+
+
+-- WORD GROUPS
+
+-- fragmentation
+--	shear
+--	restriction
+--	digest
+--	fragment
+--	breaks
+--	acoustic
+--	nebulisation
+--	nebulization
+--	nebuliz
+--	nebulis
+--	sonic
+
+-- adapter-ligation
+--	adapter
+--	ligat%
+--	blunt%
+--	phosphorylat%
+--	overhang
+--	t4-PNK
+--	t4
+--	pnk
+--	kinase
+--	a-tail
+	
+
+--enrichment
+--	clone%
+--	clonin%
+--	vector%
+--	pcr
+--	amplif
+--	polymerase	
+--	taq
+--	phusion
+--	temperat%
+--	thermal%
+--	anneal%
+--	denature%
+
+-- study_abstract
+
+select 'table: study';
+
+select 'study:study_abstract', 'fragmentation_anno', sum(c)
+from
+(
+select count(*) as c from study where
+   study_abstract like "% shear%"
+or study_abstract like "% restriction%"
+or study_abstract like "% digest%"
+or study_abstract like "% fragment%"
+or study_abstract like "% breaks %"
+or study_abstract like "% nebulis%" or study_abstract like "% nebuliz%"
+or study_abstract like "% acoustic%"
+or study_abstract like "% sonic%"
+);
+
+
+select 'study:study_abstract', 'adapter-ligation_anno', sum(c)
+from
+(
+select count(*) as c from study where
+   study_abstract like "% adapter%"
+or study_abstract like "% ligat%"
+or study_abstract like "% blunt%"
+or study_abstract like "% phosphorylat%"
+or study_abstract like "% overhang"
+or study_abstract like "% t4-PNK%"
+or study_abstract like "% t4%"
+or study_abstract like "% pnk%"
+or study_abstract like "% kinase%"
+or study_abstract like "% a-tail%"
+);
+
+select 'table: experiment';
+
+select 'experiment:study_abstract', 'enrichment_anno', sum(c)
+from
+(
+select count(*) as c from study where
+   study_abstract like "% clone%"
+or study_abstract like "% clonin%"
+or study_abstract like "% pcr %"
+or study_abstract like "% amplif%"
+or study_abstract like "% polymerase%"
+or study_abstract like "% taq%"
+or study_abstract like "% phusion%"
+or study_abstract like "% temperat%"
+or study_abstract like "% thermal%"
+or study_abstract like "% anneal%"
+or study_abstract like "% denature%"
+);
+
+-- study_description
+
+select 'table: study';
+	
+select 'study:study_description', 'fragmentation_annotation', sum(c)
+from
+(
+select count(*) as c from study where
+   study_description like "% shear%"
+or study_description like "% restriction%"
+or study_description like "% digest%"
+or study_description like "% fragment%"
+or study_description like "% breaks %"
+or study_description like "% nebulis%" or study_description like "% nebuliz%"
+or study_description like "% acoustic%"
+or study_description like "% sonic%"
+);
+
+select 'study:study_description', 'adapter-ligation_annotation', sum(c)
+from
+(
+select count(*) as c from study where
+   study_description like "% adapter%"
+or study_description like "% ligat%"
+or study_description like "% blunt%"
+or study_description like "% phosphorylat%"
+or study_description like "% overhang"
+or study_description like "% t4-PNK"
+or study_description like "% t4"
+or study_description like "% pnk"
+or study_description like "% kinase"
+or study_description like "% a-tail"
+);
+
+select 'study:study_description', 'enrichment_anno', sum(c)
+from
+(
+select count(*) as c from study where
+   study_description like "% clone%"
+or study_description like "% clonin%"
+or study_description like "% pcr %"
+or study_description like "% amplif%"
+or study_description like "% polymerase%"
+or study_description like "% taq%"
+or study_description like "% phusion%"
+or study_description like "% temperat%"
+or study_description like "% thermal%"
+or study_description like "% anneal%"
+or study_description like "% denature%"
+);
+
+
+
+-- description
+
+select 'table: sample';
+	
+select 'sample:description', 'fragmentation_anno', sum(c)
+from
+(
+select count(*) as c from sample where
+   description like "% shear%"
+or description like "% restriction%"
+or description like "% digest%"
+or description like "% fragment%"
+or description like "% breaks %"
+or description like "% nebulis%" or description like "% nebuliz%"
+or description like "% acoustic%"
+or description like "% sonic%"
+);
+
+
+select 'sample:description', 'adapter-ligation_anno', sum(c)
+from
+(
+select count(*) as c from sample where
+   description like "% adapter%"
+or description like "% ligat%"
+or description like "% blunt%"
+or description like "% phosphorylat%"
+or description like "% overhang"
+or description like "% t4-PNK"
+or description like "% t4"
+or description like "% pnk"
+or description like "% kinase"
+);
+
+select 'sample:description', 'enrichment_anno', sum(c)
+from
+(
+select count(*) as c from sample where
+   description like "% clone%"
+or description like "% clonin%"
+or description like "% pcr %"
+or description like "% amplif%"
+or description like "% polymerase%"
+or description like "% taq%"
+or description like "% phusion%"
+or description like "% temperat%"
+or description like "% thermal%"
+or description like "% anneal%"
+or description like "% denature%"
+);
+
+
+
+-- library_construction_protocol
+	
+select 'experiment:library_construction_protocol', 'fragmentation_anno', sum(c)
+from
+(
+select count(*) as c from experiment where
+   library_construction_protocol like "% shear%"
+or library_construction_protocol like "% restriction%"
+or library_construction_protocol like "% digest%"
+or library_construction_protocol like "% fragment%"
+or library_construction_protocol like "% breaks %"
+or library_construction_protocol like "% nebulis%" or library_construction_protocol like "% nebuliz%"
+or library_construction_protocol like "% acoustic%"
+or library_construction_protocol like "% sonic%"
+);
+
+
+select 'experiment:library_construction_protocol', 'adapter-ligation_anno', sum(c)
+from
+(
+select count(*) as c from experiment where
+   library_construction_protocol like "% adapter%"
+or library_construction_protocol like "% ligat%"
+or library_construction_protocol like "% blunt%"
+or library_construction_protocol like "% phosphorylat%"
+or library_construction_protocol like "% overhang"
+or library_construction_protocol like "% t4-PNK%"
+or library_construction_protocol like "% t4%"
+or library_construction_protocol like "% pnk%"
+or library_construction_protocol like "% kinase%"
+or library_construction_protocol like "% a-tail%"
+);
+
+select 'experiment:library_construction_protocol', 'enrichment_anno', sum(c)
+from
+(
+select count(*) as c from experiment where
+   library_construction_protocol like "% clone%"
+or library_construction_protocol like "% clonin%"
+or library_construction_protocol like "% pcr %"
+or library_construction_protocol like "% amplif%"
+or library_construction_protocol like "% polymerase%"
+or library_construction_protocol like "% taq%"
+or library_construction_protocol like "% phusion%"
+or library_construction_protocol like "% temperat%"
+or library_construction_protocol like "% thermal%"
+or library_construction_protocol like "% anneal%"
+or library_construction_protocol like "% denature%"
+);
+
+
+
+-- library_selection
+	
+select 'experiment:library_selection', 'fragmentation_anno', sum(c)
+from
+(
+select count(*) as c from experiment where
+   library_selection like "% shear%"
+or library_selection like "% restriction%"
+or library_selection like "% digest%"
+or library_selection like "% fragment%"
+or library_selection like "% breaks %"
+or library_selection like "% nebulis%" or library_selection like "% nebuliz%"
+or library_selection like "% acoustic%"
+or library_selection like "% sonic%"
+);
+
+
+select 'experiment:library_selection', 'adapter-ligation_anno', sum(c)
+from
+(
+select count(*) as c from experiment where
+   library_selection like "% adapter%"
+or library_selection like "% ligat%"
+or library_selection like "% blunt%"
+or library_selection like "% phosphorylat%"
+or library_selection like "% overhang"
+or library_selection like "% t4-PNK"
+or library_selection like "% t4"
+or library_selection like "% pnk"
+or library_selection like "% kinase"
+);
+
+select 'experiment:library_selection', 'enrichment_anno', sum(c)
+from
+(
+select count(*) as c from experiment where
+   library_selection like "% clone%"
+or library_selection like "% clonin%"
+or library_selection like "% pcr %"
+or library_selection like "% amplif%"
+or library_selection like "% polymerase%"
+or library_selection like "% taq%"
+or library_selection like "% phusion%"
+or library_selection like "% temperat%"
+or library_selection like "% thermal%"
+or library_selection like "% anneal%"
+or library_selection like "% denature%"
+);
+
+
+-- design_description
+	
+select 'experiment:design_description', 'fragmentation_anno', sum(c)
+from
+(
+select count(*) as c from experiment where
+   design_description like "% shear%"
+or design_description like "% restriction%"
+or design_description like "% digest%"
+or design_description like "% fragment%"
+or design_description like "% breaks %"
+or design_description like "% nebulis%" or design_description like "% nebuliz%"
+or design_description like "% acoustic%"
+or design_description like "% sonic%"
+);
+
+
+select 'experiment:design_description', 'adapter-ligation_anno', sum(c)
+from
+(
+select count(*) as c from experiment where
+   design_description like "% adapter%"
+or design_description like "% ligat%"
+or design_description like "% blunt%"
+or design_description like "% phosphorylat%"
+or design_description like "% overhang"
+or design_description like "% t4-PNK"
+or design_description like "% t4"
+or design_description like "% pnk"
+or design_description like "% kinase"
+or design_description like "% a-tail"
+);
+
+select 'experiment:design_description', 'enrichment_anno', sum(c)
+from
+(
+select count(*) as c from experiment where
+   design_description like "% clone%"
+or design_description like "% clonin%"
+or design_description like "% pcr %"
+or design_description like "% amplif%"
+or design_description like "% polymerase%"
+or design_description like "% taq%"
+or design_description like "% phusion%"
+or design_description like "% temperat%"
+or design_description like "% thermal%"
+or design_description like "% anneal%"
+or design_description like "% denature%"
+);
+
+-- experiment_attribute
+	
+select 'experiment:experiment_attribute', 'fragmentation_anno', sum(c)
+from
+(
+select count(*) as c from experiment where
+   experiment_attribute like "% shear%"
+or experiment_attribute like "% restriction%"
+or experiment_attribute like "% digest%"
+or experiment_attribute like "% fragment%"
+or experiment_attribute like "% breaks %"
+or experiment_attribute like "% nebulis%" or library_selection like "% nebuliz%"
+or experiment_attribute like "% acoustic%"
+or experiment_attribute like "% sonic%"
+);
+
+
+select 'experiment:experiment_attribute', 'adapter-ligation_anno', sum(c)
+from
+(
+select count(*) as c from experiment where
+   experiment_attribute like "% adapter%"
+or experiment_attribute like "% ligat%"
+or experiment_attribute like "% blunt%"
+or experiment_attribute like "% phosphorylat%"
+or experiment_attribute like "% overhang"
+or experiment_attribute like "% t4-PNK"
+or experiment_attribute like "% t4"
+or experiment_attribute like "% pnk"
+or experiment_attribute like "% kinase"
+);
+
+select 'experiment:experiment_attribute', 'enrichment_anno', sum(c)
+from
+(
+select count(*) as c from experiment where
+   experiment_attribute like "% clone%"
+or experiment_attribute like "% clonin%"
+or experiment_attribute like "% pcr %"
+or experiment_attribute like "% amplif%"
+or experiment_attribute like "% polymerase%"
+or experiment_attribute like "% taq%"
+or experiment_attribute like "% phusion%"
+or experiment_attribute like "% temperat%"
+or experiment_attribute like "% thermal%"
+or experiment_attribute like "% anneal%"
+or experiment_attribute like "% denature%"
+);
+
+
+
+select 'experiment:library_construction_protocol', 'all_anno', sum(c)
+
+-- ALL from Experiment table (no master join on submission table)
+select 'experiment:library_construction_protocol', 'all_anno', sum(c)
+from
+(
+select count(*) as c from experiment where
+(
+   library_construction_protocol like "% shear%"
+or library_construction_protocol like "% restriction%"
+or library_construction_protocol like "% digest%"
+or library_construction_protocol like "% fragment%"
+or library_construction_protocol like "% breaks %"
+or library_construction_protocol like "% nebulis%" or library_construction_protocol like "% nebuliz%"
+or library_construction_protocol like "% acoustic%"
+or library_construction_protocol like "% sonic%"
+)
+and
+(
+   library_construction_protocol like "% adapter%"
+or library_construction_protocol like "% ligat%"
+or library_construction_protocol like "% blunt%"
+or library_construction_protocol like "% phosphorylat%"
+or library_construction_protocol like "% overhang"
+or library_construction_protocol like "% t4-PNK%"
+or library_construction_protocol like "% t4%"
+or library_construction_protocol like "% pnk%"
+or library_construction_protocol like "% kinase%"
+or library_construction_protocol like "% a-tail%"
+)
+and
+(
+   library_construction_protocol like "% clone%"
+or library_construction_protocol like "% clonin%"
+or library_construction_protocol like "% pcr %"
+or library_construction_protocol like "% amplif%"
+or library_construction_protocol like "% polymerase%"
+or library_construction_protocol like "% taq%"
+or library_construction_protocol like "% phusion%"
+or library_construction_protocol like "% temperat%"
+or library_construction_protocol like "% thermal%"
+or library_construction_protocol like "% anneal%"
+or library_construction_protocol like "% denature%"
+)
+);

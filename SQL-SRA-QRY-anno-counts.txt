@@ -1,0 +1,22 @@
+
+-- DEPENDENCIES: anno [must first run SQL-SRA-QRY-anno-distribution.txt SQL script]
+
+
+-- number of annotations by date
+
+select anno_date, sum(anno_count)
+from anno
+group by anno_date;
+
+-- total number of annotation by annotation type
+
+select anno, sum(anno_count)
+from anno
+group by anno;
+
+-- total number of annotation by annotation type and date
+
+select anno, anno_date, sum(anno_count)
+from anno
+group by anno_date, anno
+order by anno, anno_date;

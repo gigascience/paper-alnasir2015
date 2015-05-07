@@ -1,0 +1,51 @@
+
+
+select 'table: submission-study joined records by year';
+
+-- Total study-submission joined records
+select sum(c) from
+(
+select
+  strftime('%Y', submission_date) as m, count(*) as c from submission as sub
+join
+  study as stu
+on stu.submission_accession = sub.submission_accession
+group by m
+);
+
+-- Experiment record counts
+
+select 'table: submission-experiment joined records by year';
+
+select
+  strftime('%Y', submission_date) as m, count(*) from submission as sub
+join
+  experiment as exp
+on exp.submission_accession = sub.submission_accession
+group by m;
+
+
+select 'table: study-submission joined - Total records';
+
+-- 16,142
+
+select sum (c) from
+(
+select 1 as c from study st
+where
+st.submission_accession in (select submission_accession from experiment xp where st.submission_accession = xp.submission_accession)
+and 
+st.submission_accession in (select submission_accession from submission sb where st.submission_accession = sb.submission_accession)
+);
+
+
+select 'table: study-experiment joined - Total records';
+
+select sum (c) from
+(
+select 1 as c from study st
+where
+st.study_accession in (select study_accession from experiment xp where st.study_accession = xp.study_accession)
+);
+
+

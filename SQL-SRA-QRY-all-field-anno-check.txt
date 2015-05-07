@@ -1,0 +1,270 @@
+-- By Jamie Al-Nasir, 28/04/2013
+-- Dept. of Computer Science, Royal Holloway university
+--
+--
+-- SQL Query for SQLite that lists counts of ALL fields accross ALL tables
+-- containing ANY annotation for ANY Protocol step - Aim is to ensure annotation
+-- is not made in fields we are not expecting or have not examined.
+--
+
+
+select
+  field, count(*)
+from
+(
+select 'submission:submission_alias' as field, submission_alias as content from submission
+union all
+select 'submission:submission_comment' as field, submission_comment as content from submission
+union all
+select 'submission:files' as field, files as content from submission
+union all
+select 'submission:broker_name' as field, broker_name as content from submission
+union all
+select 'submission:center_name' as field, center_name as content from submission
+union all
+select 'submission:lab_name' as field, lab_name as content from submission
+union all
+select 'submission:submission_date' as field, submission_date as content from submission
+union all
+select 'submission:sra_link' as field, sra_link as content from submission
+union all
+select 'submission:submission_url_link' as field, submission_url_link as content from submission
+union all
+select 'submission:xref_link' as field, xref_link as content from submission
+union all
+select 'submission:submission_entrez_link' as field, submission_entrez_link as content from submission
+union all
+select 'submission:ddbj_link' as field, ddbj_link as content from submission
+union all
+select 'submission:ena_link' as field, ena_link as content from submission
+union all
+select 'submission:submission_attribute' as field, submission_attribute as content from submission
+union all
+select 'submission:sradb_updated' as field, sradb_updated as content from submission
+
+union all
+
+select 'study:study_alias' as field, study_alias as content from study
+union all
+select 'study:study_title' as field, study_title as content from study
+union all
+select 'study:study_type' as field, study_type as content from study
+union all
+select 'study:study_abstract' as field, study_abstract as content from study
+union all
+select 'study:broker_name' as field, broker_name as content from study
+union all
+select 'study:center_name' as field, center_name as content from study
+union all
+select 'center_project_name' as field, center_project_name as content from study
+union all
+select 'study:study_description' as field, study_description as content from study
+union all
+select 'related_studies' as field, related_studies as content from study
+union all
+select 'study:primary_study' as field, primary_study as content from study
+union all
+select 'study:sra_link' as field, sra_link as content from study
+union all
+select 'study:study_url_link' as field, study_url_link as content from study
+union all
+select 'study:xref_link' as field, xref_link as content from study
+union all
+select 'study:study_entrez_link' as field, study_entrez_link as content from study
+union all
+select 'study:ddbj_link' as field, ddbj_link as content from study
+union all
+select 'study:ena_link' as field, ena_link as content from study
+union all
+select 'study:study_attribute' as field, study_attribute as content from study
+union all
+select 'study:sradb_updated' as field, sradb_updated as content from study
+
+union all
+
+select 'sample:sample_alias' as field, sample_alias as content from sample
+union all
+select 'sample:broker_name' as field, broker_name as content from sample
+union all
+select 'sample:center_name' as field, center_name as content from sample
+union all
+select 'sample:taxon_id' as field, taxon_id as content from sample
+union all
+select 'sample:scientific_name' as field, scientific_name as content from sample
+union all
+select 'sample:common_name' as field, common_name as content from sample
+union all
+select 'sample:anonymized_name' as field, anonymized_name as content from sample
+union all
+select 'sample:individual_name' as field, individual_name as content from sample
+union all
+select 'sample:description' as field, description as content from sample
+union all
+select 'sample:sra_link' as field, sra_link as content from sample
+union all
+select 'sample:sample_url_link' as field, sample_url_link as content from sample
+union all
+select 'sample:xref_link' as field, xref_link as content from sample
+union all
+select 'sample:sample_entrez_link' as field, sample_entrez_link as content from sample
+union all
+select 'sample:ddbj_link' as field, ddbj_link as content from sample
+union all
+select 'sample:ena_link' as field, ena_link as content from sample
+union all
+select 'sample:sample_attribute' as field, sample_attribute as content from sample
+union all
+select 'sample:sradb_updated' as field, sradb_updated as content from sample
+
+union all
+
+select 'experiment:bamFile' as field, bamFile as content from experiment
+union all
+select 'experiment:fastqFTP' as field, fastqFTP as content from experiment
+union all
+select 'experiment:experiment_alias' as field, experiment_alias as content from experiment
+union all
+select 'experiment:broker_name' as field, broker_name as content from experiment
+union all
+select 'experiment:center_name' as field, center_name as content from experiment
+union all
+select 'experiment:title' as field, title as content from experiment
+union all
+select 'experiment:study_name' as field, study_name as content from experiment
+union all
+select 'experiment:design_description' as field, design_description as content from experiment
+union all
+select 'experiment:sample_name' as field, sample_name as content from experiment
+union all
+select 'experiment:sample_member' as field, sample_member as content from experiment
+union all
+select 'experiment:library_name' as field, library_name as content from experiment
+union all
+select 'experiment:library_strategy' as field, library_strategy as content from experiment
+union all
+select 'experiment:library_source' as field, library_source as content from experiment
+union all
+select 'experiment:library_selection' as field, library_selection as content from experiment
+union all
+select 'experiment:library_layout' as field, library_layout as content from experiment
+union all
+select 'experiment:targeted_loci' as field, targeted_loci as content from experiment
+union all
+select 'experiment:library_construction_protocol' as field, library_construction_protocol as content from experiment
+union all
+select 'experiment:spot_length' as field, spot_length as content from experiment
+union all
+select 'experiment:adapter_spec' as field, adapter_spec as content from experiment
+union all
+select 'experiment:read_spec' as field, read_spec as content from experiment
+union all
+select 'experiment:platform' as field, platform as content from experiment
+union all
+select 'experiment:instrument_model' as field, instrument_model as content from experiment
+union all
+select 'experiment:platform_parameters' as field, platform_parameters as content from experiment
+union all
+select 'experiment:sequence_space' as field, sequence_space as content from experiment
+union all
+select 'experiment:base_caller' as field, base_caller as content from experiment
+union all
+select 'experiment:quality_scorer' as field, quality_scorer as content from experiment
+union all
+select 'experiment:number_of_levels' as field, number_of_levels as content from experiment
+union all
+select 'experiment:multiplier' as field, multiplier as content from experiment
+union all
+select 'experiment:qtype' as field, qtype as content from experiment
+union all
+select 'experiment:sra_link' as field, sra_link as content from experiment
+union all
+select 'experiment:experiment_url_link' as field, experiment_url_link as content from experiment
+union all
+select 'experiment:xref_link' as field, xref_link as content from experiment
+union all
+select 'experiment:experiment_entrez_link' as field, experiment_entrez_link as content from experiment
+union all
+select 'experiment:ddbj_link' as field, ddbj_link as content from experiment
+union all
+select 'experiment:ena_link' as field, ena_link as content from experiment
+union all
+select 'experiment:experiment_attribute' as field, experiment_attribute as content from experiment
+union all
+select 'experiment:sradb_updated' as field, sradb_updated as content from experiment
+
+union all
+
+select 'run:bamFile' as field, bamFile as content from run
+union all
+select 'run:run_alias' as field, run_alias as content from run
+union all
+select 'run:broker_name' as field, broker_name as content from run
+union all
+select 'run:instrument_name' as field, instrument_name as content from run
+union all
+select 'run:run_date' as field, run_date as content from run
+union all
+select 'run:run_file' as field, run_file as content from run
+union all
+select 'run:run_center' as field, run_center as content from run
+union all
+select 'run:total_data_blocks' as field, total_data_blocks as content from run
+union all
+select 'run:experiment_name' as field, experiment_name as content from run
+union all
+select 'run:sra_link' as field, sra_link as content from run
+union all
+select 'run:run_url_link' as field, run_url_link as content from run
+union all
+select 'run:xref_link' as field, xref_link as content from run
+union all
+select 'run:run_entrez_link' as field, run_entrez_link as content from run
+union all
+select 'run:ddbj_link' as field, ddbj_link as content from run
+union all
+select 'run:ena_link' as field, ena_link as content from run
+union all
+select 'run:run_attribute' as field, run_attribute as content from run
+union all
+select 'run:sradb_updated' as field, sradb_updated as content from run
+)
+
+where
+(
+   content like "% shear%"
+or content like "% restriction%"
+or content like "% digest%"
+or content like "% fragment%"
+or content like "% breaks %"
+or content like "% nebulis%" or content like "% nebuliz%"
+or content like "% acoustic%"
+or content like "% sonic%"
+)
+OR
+(
+   content like "% adapter%"
+or content like "% ligat%"
+or content like "% blunt%"
+or content like "% phosphorylat%"
+or content like "% overhang"
+or content like "% t4-PNK%"
+or content like "% t4%"
+or content like "% pnk%"
+or content like "% kinase%"
+or content like "% a-tail%"
+)
+OR
+(
+   content like "% clone%"
+or content like "% clonin%"
+or content like "% pcr %"
+or content like "% amplif%"
+or content like "% polymerase%"
+or content like "% taq%"
+or content like "% phusion%"
+or content like "% temperat%"
+or content like "% thermal%"
+or content like "% anneal%"
+or content like "% denature%"
+) group by field;
+

@@ -1,0 +1,284 @@
+-- By Jamie Al-Nasir, 01/12/2013
+-- Dept. of Computer Science, Royal Holloway university
+--
+--
+-- A script of SQL Queries for SQLite that convert the SRA
+-- a into directed acyclic graph for 2D-visualisation
+
+-- Some tricks are required in order to tie the graph together...
+--
+-- i) a psudo-node is created to represent each table in the SRA
+-- i.e. study, experiment, sample, run, submission etc...
+-- ii) pseudo-edges are created to join each table record to one
+-- of these pseudo-nodes so as to create hubs in the graph.
+--
+-- It is possible to weight the edges so the pseudo-edges have
+-- an edge weight of 0.5 and normal edges have an edge weight of 1.
+--
+-- It is probably a good idea to take a smaller proportion of this
+-- data as it contains approximately 4,049,658 edges and 1,706,119 nodes!!
+--
+
+
+-- Top level studies, create tree table
+create table tree
+as select rowid as id,
+study_accession as stu_access,
+'' as exp_access,
+'' as run_access,
+'' as sam_access,
+submission_accession as sub_access,
+'study' as type
+from study;
+
+-- study table object
+insert into tree 
+select (select max(id) from tree)+1 as id,
+'' as stu_access,
+'' as exp_access,
+'' as run_access,
+'' as sam_access,
+'' as sub_access,
+'tblstudy' as type
+from metaInfo where rowid = 1;
+
+-- study table items
+insert into tree 
+select id,
+'' as stu_access,
+'' as exp_access,
+'' as run_access,
+'' as sam_access,
+'' as sub_access,
+'tblstudy-item' as type
+from tree where tree.type = 'study';
+
+
+-- "Central"/top-like level submissions
+insert into tree 
+select rowid+(select max(id) from tree) as id,
+'' as stu_access,
+'' as exp_access,
+'' as run_access,
+'' as sam_access,
+submission_accession as sub_access,
+'submission' as type
+from submission;
+
+-- submissions table object
+insert into tree 
+select (select max(id) from tree)+1 as id,
+'' as stu_access,
+'' as exp_access,
+'' as run_access,
+'' as sam_access,
+'' as sub_access,
+'tblsubmission' as type
+from metaInfo where rowid = 1;
+
+-- submissions table items
+insert into tree 
+select id,
+'' as stu_access,
+'' as exp_access,
+'' as run_access,
+'' as sam_access,
+'' as sub_access,
+'tblsubmission-item' as type
+from tree where tree.type = 'submission';
+
+
+-- experiments
+insert into tree 
+select rowid+(select max(id) from tree) as id,
+study_accession as stu_access,
+experiment_accession as exp_access,
+'' as run_access,
+sample_accession as sam_access,
+submission_accession as sub_access,
+'experiment' as type
+from experiment;
+
+-- experiment table object
+insert into tree 
+select (select max(id) from tree)+1 as id,
+'' as stu_access,
+'' as exp_access,
+'' as run_access,
+'' as sam_access,
+'' as sub_access,
+'tblexperiment' as type
+from metaInfo where rowid = 1;
+
+-- experiment table items
+insert into tree 
+select id,
+'' as stu_access,
+'' as exp_access,
+'' as run_access,
+'' as sam_access,
+'' as sub_access,
+'tblexperiment-item' as type
+from tree where tree.type = 'experiment';
+
+
+-- samples
+insert into tree 
+select rowid+(select max(id) from tree) as id,
+'' as stu_access,
+'' as exp_access,
+'' as run_access,
+sample_accession as sam_access,
+submission_accession as sub_access,
+'sample' as type
+from sample;
+
+-- samples table object
+insert into tree 
+select (select max(id) from tree)+1 as id,
+'' as stu_access,
+'' as exp_access,
+'' as run_access,
+'' as sam_access,
+'' as sub_access,
+'tblsample' as type
+from metaInfo where rowid = 1;
+
+-- samples table items
+insert into tree 
+select id,
+'' as stu_access,
+'' as exp_access,
+'' as run_access,
+'' as sam_access,
+'' as sub_access,
+'tblsample-item' as type
+from tree where tree.type = 'sample';
+
+-- runs
+insert into tree 
+select rowid+(select max(id) from tree) as id,
+'' as stu_access,
+experiment_accession as exp_access,
+run_accession as run_access,
+'' as sam_access,
+submission_accession as sub_access,
+'run' as type
+from run;
+
+-- run table object
+insert into tree 
+select (select max(id) from tree)+1 as id,
+'' as stu_access,
+'' as exp_access,
+'' as run_access,
+'' as sam_access,
+'' as sub_access,
+'tblrun' as type
+from metaInfo where rowid = 1;
+
+-- run table items
+insert into tree 
+select id,
+'' as stu_access,
+'' as exp_access,
+'' as run_access,
+'' as sam_access,
+'' as sub_access,
+'tblrun-item' as type
+from tree where tree.type = 'run';
+
+
+
+-- experiment-study, create normalised src/dest edges tree (tree_n)
+create table tree_n as
+select a.id as dest, b.id as src, 'study-experiment' as type from tree a
+inner join tree as b on a.stu_access = b.stu_access
+  where a.type = 'study'
+  and b.type = 'experiment';
+  
+-- with weights
+select a.id as dest, b.id as src, 'study-experiment' as type, weight from tree a
+inner join tree as b on a.stu_access = b.stu_access,
+id_exp_w as w on b.id = w.id
+  where a.type = 'study'
+  and b.type = 'experiment';
+  
+  
+
+-- study table
+insert into tree_n
+select id as dest, (select id from tree where type = 'tblstudy') as src, 'tblstudy-item' as type from tree
+where
+  tree.type = 'tblstudy-item';
+  
+
+-- sample-experiment
+insert into tree_n
+select a.id as dest, b.id as src, 'experiment-sample' as type from tree a
+inner join tree as b on a.sam_access = b.sam_access
+  where a.type = 'experiment'
+  and b.type = 'sample'; 
+
+-- experiment table
+insert into tree_n
+select id as dest, (select id from tree where type = 'tblexperiment') as src, 'tblexperiment-item' as type from tree
+where
+  tree.type = 'tblexperiment-item';
+  
+-- sample-run
+insert into tree_n
+select a.id as dest, b.id as src, 'sample-run' as type from tree a
+inner join tree as b on a.sam_access = b.sam_access
+  where a.type = 'sample'
+  and b.type = 'run'; 
+
+-- sample table
+insert into tree_n
+select id as dest, (select id from tree where type = 'tblsample') as src, 'tblsample-item' as type from tree
+where
+  tree.type = 'tblsample-item';
+
+-- run table
+insert into tree_n
+select id as dest, (select id from tree where type = 'tblrun') as src, 'tblrun-item' as type from tree
+where
+  tree.type = 'tblrun-item';
+
+-- Submission edges
+  
+-- study-submission
+insert into tree_n
+select a.id as dest, b.id as src, 'study-submission' as type from tree a
+inner join tree as b on a.sub_access = b.sub_access
+  where a.type = 'study'
+  and b.type = 'submission'; 
+  
+-- exp-submission
+insert into tree_n
+select a.id as dest, b.id as src, 'experiment-submission' as type from tree a
+inner join tree as b on a.sub_access = b.sub_access
+  where a.type = 'experiment'
+  and b.type = 'submission';  
+
+-- sample-submission
+insert into tree_n
+select a.id as dest, b.id as src, 'sample-submission' as type from tree a
+inner join tree as b on a.sub_access = b.sub_access
+  where a.type = 'sample'
+  and b.type = 'submission';
+  
+-- run-submission
+insert into tree_n
+select a.id as dest, b.id as src, 'run-submission' as type from tree a
+inner join tree as b on a.sub_access = b.sub_access
+  where a.type = 'run'
+  and b.type = 'submission';
+
+-- submission table
+insert into tree_n
+select id as dest, (select id from tree where type = 'tblsubmission') as src, 'tblsubmission-item' as type from tree
+where
+  tree.type = 'tblsubmission-item';
+
+  

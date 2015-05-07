@@ -1,0 +1,49 @@
+
+select 'table: experiment';
+
+select
+  'experiment:library_construction_protocol', 'all_anno', strftime('%Y', submission_date) as m, count(*) from submission as sub
+join
+  experiment as exp
+on exp.submission_accession = sub.submission_accession
+where
+(
+   library_construction_protocol like "% shear%"
+or library_construction_protocol like "% restriction%"
+or library_construction_protocol like "% digest%"
+or library_construction_protocol like "% fragment%"
+or library_construction_protocol like "% breaks %"
+or library_construction_protocol like "% nebulis%" or library_construction_protocol like "% nebuliz%"
+or library_construction_protocol like "% acoustic%"
+or library_construction_protocol like "% sonic%"
+)
+and
+(
+   library_construction_protocol like "% adapter%"
+or library_construction_protocol like "% ligat%"
+or library_construction_protocol like "% blunt%"
+or library_construction_protocol like "% phosphorylat%"
+or library_construction_protocol like "% overhang"
+or library_construction_protocol like "% t4-PNK%"
+or library_construction_protocol like "% t4%"
+or library_construction_protocol like "% pnk%"
+or library_construction_protocol like "% kinase%"
+or library_construction_protocol like "% a-tail%"
+)
+and
+(
+   library_construction_protocol like "% clone%"
+or library_construction_protocol like "% clonin%"
+or library_construction_protocol like "% pcr %"
+or library_construction_protocol like "% amplif%"
+or library_construction_protocol like "% polymerase%"
+or library_construction_protocol like "% taq%"
+or library_construction_protocol like "% phusion%"
+or library_construction_protocol like "% temperat%"
+or library_construction_protocol like "% thermal%"
+or library_construction_protocol like "% anneal%"
+or library_construction_protocol like "% denature%"
+)
+group by m;
+
+
